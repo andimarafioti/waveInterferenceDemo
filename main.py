@@ -17,6 +17,8 @@ class InterferenceModel(object):
         self._sampling_rate = 44100
         self._frequencyOfFirstSignal = 440
         self._frequencyOfSecondSignal = 220
+        self._lastTime = time.clock()
+        self._timeCorrection = 1/1000
 
         self._countOfCycles = 2
         self._time = np.arange(0, self._countOfCycles
@@ -47,16 +49,20 @@ class InterferenceModel(object):
         self._view.show()
 
     def update(self):
-        t1=time.clock()
-        interval_shift = int(time.time()*50 % (len(self._totalSignal)-self._window_size))
+        # t1=time.clock()
+        print(self._lastTime)
+        interval_shift = int(self._sampling_rate * self._lastTime * self._timeCorrection
+                             % (len(self._totalSignal)-self._window_size))
+        # print(interval_shift)
 
         C = pyqtgraph.hsvColor(0.66, alpha=.5)
         pen = pyqtgraph.mkPen(width=10, color=C)
         self._view.grPlot.plot(self._time[interval_shift:interval_shift+self._window_size],
                                self._totalSignal[interval_shift:interval_shift+self._window_size], pen=pen, clear=True)
+        self._lastTime = time.clock()
         # print("update took %.02f ms"%((time.clock()-t1)*1000))
 
-        QtCore.QTimer.singleShot(5, self.update)  # QUICKLY repeat
+        QtCore.QTimer.singleShot(10, self.update)  # QUICKLY repeat
 
 
 if __name__ == "__main__":
