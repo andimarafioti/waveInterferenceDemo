@@ -49,18 +49,14 @@ class InterferenceModel(object):
         self._view.show()
 
     def update(self):
-        # t1=time.clock()
-        print(self._lastTime)
         interval_shift = int(self._sampling_rate * self._lastTime * self._timeCorrection
                              % (len(self._totalSignal)-self._window_size))
-        # print(interval_shift)
 
         C = pyqtgraph.hsvColor(0.66, alpha=.5)
         pen = pyqtgraph.mkPen(width=10, color=C)
         self._view.grPlot.plot(self._time[interval_shift:interval_shift+self._window_size],
                                self._totalSignal[interval_shift:interval_shift+self._window_size], pen=pen, clear=True)
         self._lastTime = time.clock()
-        # print("update took %.02f ms"%((time.clock()-t1)*1000))
 
         QtCore.QTimer.singleShot(10, self.update)  # QUICKLY repeat
 
