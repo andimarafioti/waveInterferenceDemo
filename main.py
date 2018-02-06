@@ -29,11 +29,15 @@ class InterferenceModel(object):
         self._window_size = int(len(self._time)*2 / self._countOfCycles)
 
         self._phaseOfFirstSignal = 0
-        self._firstSignal = np.sin(2 * np.pi * self._frequencyOfFirstSignal * self._time + self._phaseOfFirstSignal,
+        self._firstAmplitude = 1
+        self._firstSignal = self._firstAmplitude * \
+                            np.sin(2 * np.pi * self._frequencyOfFirstSignal * self._time + self._phaseOfFirstSignal,
                                    dtype=np.float32)
 
         self._phaseOfSecondSignal = 0
-        self._secondSignal = np.sin(2 * np.pi * self._frequencyOfSecondSignal * self._time + self._phaseOfSecondSignal,
+        self._secondAmplitude = 1
+        self._secondSignal = self._secondAmplitude * \
+                             np.sin(2 * np.pi * self._frequencyOfSecondSignal * self._time + self._phaseOfSecondSignal,
                                     dtype=np.float32)
 
         self._totalSignal = 0.5 * (self._firstSignal + self._secondSignal)
@@ -57,12 +61,20 @@ class InterferenceModel(object):
     def setTimeCorrection(self, value):
         self._timeCorrection = 1/(1000 - 10 * value)
 
+    def activateFirstSignal(self, value):
+        self._firstAmplitude = value/2
+        self._updateSignals()
+
     def setFrequencyOfFirstSignal(self, value):
         self._frequencyOfFirstSignal = self.FREQUENCIES[value-10]
         self._updateSignals()
 
     def setPhaseOfFirstSignal(self, value):
         self._phaseOfFirstSignal = 2 * np.pi * (value / 7)
+        self._updateSignals()
+
+    def activateSecondSignal(self, value):
+        self._secondAmplitude = value/2
         self._updateSignals()
 
     def setFrequencyOfSecondSignal(self, value):
@@ -81,9 +93,11 @@ class InterferenceModel(object):
                                / min(self._frequencyOfFirstSignal, self._frequencyOfSecondSignal),
                                1 / self._sampling_rate)
         self._window_size = int(len(self._time)*2 / self._countOfCycles)
-        self._firstSignal = np.sin(2 * np.pi * self._frequencyOfFirstSignal * self._time + self._phaseOfFirstSignal,
+        self._firstSignal = self._firstAmplitude * \
+                            np.sin(2 * np.pi * self._frequencyOfFirstSignal * self._time + self._phaseOfFirstSignal,
                                    dtype=np.float32)
-        self._secondSignal = np.sin(2 * np.pi * self._frequencyOfSecondSignal * self._time + self._phaseOfSecondSignal,
+        self._secondSignal = self._secondAmplitude * \
+                             np.sin(2 * np.pi * self._frequencyOfSecondSignal * self._time + self._phaseOfSecondSignal,
                                     dtype=np.float32)
 
         self._totalSignal = 0.5 * (self._firstSignal + self._secondSignal)

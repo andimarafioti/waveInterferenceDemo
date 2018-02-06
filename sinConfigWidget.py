@@ -18,7 +18,7 @@ class SinConfigWidget(QWidget):
         self.layout().addWidget(self.activateLabel, 0, 0, 1, 1)
 
         self.activateButton = QCheckBox(self)
-        self.activateButton.setEnabled(True)
+        self.activateButton.setChecked(True)
 
         self.layout().addWidget(self.activateButton, 0, 1, 1, 1)
 
