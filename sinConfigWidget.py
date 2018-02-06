@@ -19,29 +19,23 @@ class SinConfigWidget(QWidget):
 
         self.layout().addWidget(self.activateButton, 0, 0, 1, 1)
 
-        sliderView = QWidget(self)
-        sliderView.setLayout(QGridLayout())
+        freqSliderView = QWidget(self)
+        freqSliderView.setLayout(QGridLayout())
 
-        nameView = QLabel('frec')
+        freqNameView = QLabel('frec')
         self.freqSlider = QSlider(QtCore.Qt.Horizontal)
 
-        sliderView.layout().addWidget(nameView, 0, 0, 1, 1)
-        sliderView.layout().addWidget(self.freqSlider, 0, 1, 1, 1)
+        freqSliderView.layout().addWidget(freqNameView, 0, 0, 1, 1)
+        freqSliderView.layout().addWidget(self.freqSlider, 0, 1, 1, 1)
 
-        self.layout().addWidget(sliderView, 1, 0, 1, 1)
-        self.phaseSlider = self._slider('phase')
-        self.layout().addWidget(self.phaseSlider, 2, 0, 1, 1)
+        phaseSliderView = QWidget(self)
+        phaseSliderView.setLayout(QGridLayout())
 
-    def _slider(self, name):
-        slider = QWidget(self)
-        slider.setLayout(QGridLayout())
+        phaseNameView = QLabel('phase')
+        self.phaseSlider = QSlider(QtCore.Qt.Horizontal)
 
-        nameView = QLabel(name)
-        actualSlider = QSlider(QtCore.Qt.Horizontal)
-        actualSlider.sliderMoved.connect(print)
+        phaseSliderView.layout().addWidget(phaseNameView, 0, 0, 1, 1)
+        phaseSliderView.layout().addWidget(self.phaseSlider, 0, 1, 1, 1)
 
-        slider.layout().addWidget(nameView, 0, 0, 1, 1)
-        slider.layout().addWidget(actualSlider, 0, 1, 1, 1)
-
-        return slider
-
+        self.layout().addWidget(freqSliderView, 1, 0, 1, 1)
+        self.layout().addWidget(phaseSliderView, 2, 0, 1, 1)

@@ -21,29 +21,27 @@ class InterferenceView(QtGui.QMainWindow):
         self.resize(820, 650)
         self.setAutoFillBackground(False)
         self.centralwidget = QtGui.QWidget(self)
-        self.verticalLayout = QtGui.QVBoxLayout(self.centralwidget)
+        self.gridLayout = QtGui.QGridLayout(self.centralwidget)
 
         speedSlider = QSlider(QtCore.Qt.Horizontal)
         speedSlider.valueChanged.connect(self._model.setTimeCorrection)
-        self.verticalLayout.addWidget(speedSlider)
+        self.gridLayout.addWidget(speedSlider, 0, 1, 1, 1)
 
-        self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setContentsMargins(-1, -1, 0, 0)
-        self.horizontalLayout.setSpacing(10)
         self.chkHearSound = QtGui.QCheckBox(self.centralwidget)
-        self.horizontalLayout.addWidget(self.chkHearSound)
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.gridLayout.addWidget(self.chkHearSound, 0, 0, 1, 1)
         self.grPlot = PlotWidget(self.centralwidget)
         self.grPlot.hideAxis('bottom')
-        self.verticalLayout.addWidget(self.grPlot)
+        self.gridLayout.addWidget(self.grPlot, 1, 0, 1, 2)
         self.setCentralWidget(self.centralwidget)
 
         self._sinConfigWidget = SinConfigWidget(self)
         self._sinConfigWidget.freqSlider.valueChanged.connect(self._model.setFrequencyOfFirstSignal)
-        self.verticalLayout.addWidget(self._sinConfigWidget)
+        self._sinConfigWidget.phaseSlider.valueChanged.connect(self._model.setPhaseOfFirstSignal)
 
-        self.retranslateUi(self)
-        QtCore.QMetaObject.connectSlotsByName(self)
+        self.gridLayout.addWidget(self._sinConfigWidget, 2, 0, 1, 1)
+
+        # self.retranslateUi(self)
+        # QtCore.QMetaObject.connectSlotsByName(self)
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle("Interference")

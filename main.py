@@ -53,7 +53,10 @@ class InterferenceModel(object):
 
     def setFrequencyOfFirstSignal(self, value):
         self._frequencyOfFirstSignal = 100 + value
-        print(self._frequencyOfFirstSignal)
+        self._updateSignals()
+
+    def setPhaseOfFirstSignal(self, value):
+        self._phaseOfFirstSignal = 2 * np.pi * (value / 100)
         self._updateSignals()
 
     def _updateSignals(self):
@@ -61,12 +64,8 @@ class InterferenceModel(object):
                                / min(self._frequencyOfFirstSignal, self._frequencyOfSecondSignal),
                                1 / self._sampling_rate)
         self._window_size = int(len(self._time)*2 / self._countOfCycles)
-
-        self._phaseOfFirstSignal = 0
         self._firstSignal = np.sin(2 * np.pi * self._frequencyOfFirstSignal * self._time + self._phaseOfFirstSignal,
                                    dtype=np.float32)
-
-        self._phaseOfSecondSignal = 0
         self._secondSignal = np.sin(2 * np.pi * self._frequencyOfSecondSignal * self._time + self._phaseOfSecondSignal,
                                     dtype=np.float32)
 
