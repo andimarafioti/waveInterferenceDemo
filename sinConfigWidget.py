@@ -24,7 +24,7 @@ class SinConfigWidget(QWidget):
 
         freqNameView = QLabel('frec')
         self.freqSlider = QSlider(QtCore.Qt.Horizontal)
-        self.freqSlider.setRange(10, 20)
+        self.freqSlider.setRange(10, 19)
         self.freqSlider.setPageStep(2)
         self.freqSlider.setTickInterval(1)
         self.freqSlider.setTickPosition(QSlider.TicksBelow)

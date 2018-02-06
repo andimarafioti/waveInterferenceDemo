@@ -11,12 +11,14 @@ __author__ = 'Andres'
 
 
 class InterferenceModel(object):
+    FREQUENCIES = [110*integer for integer in range(1, 11)]
+
     def __init__(self):
         self._view = InterferenceView(self)
 
         self._sampling_rate = 44100
-        self._frequencyOfFirstSignal = 440
-        self._frequencyOfSecondSignal = 220
+        self._frequencyOfFirstSignal = self.FREQUENCIES[3]
+        self._frequencyOfSecondSignal = self.FREQUENCIES[1]
         self._lastTime = time.clock()
         self._timeCorrection = 1 / 1000
 
@@ -40,6 +42,8 @@ class InterferenceModel(object):
 
     def hearSound(self, bool):
         if bool:
+            print(self._window_size)
+            self._audioPlayer = AudioPlayer(0.1 * self._totalSignal, self._sampling_rate, self._window_size, 2)
             self._audioPlayer.start()
         else:
             self._audioPlayer.stop()
@@ -51,7 +55,7 @@ class InterferenceModel(object):
         self._timeCorrection = 1/(1000 - 10 * value)
 
     def setFrequencyOfFirstSignal(self, value):
-        self._frequencyOfFirstSignal = 100 + value
+        self._frequencyOfFirstSignal = self.FREQUENCIES[value-10]
         self._updateSignals()
 
     def setPhaseOfFirstSignal(self, value):
@@ -59,7 +63,9 @@ class InterferenceModel(object):
         self._updateSignals()
 
     def setFrequencyOfSecondSignal(self, value):
-        self._frequencyOfSecondSignal = 100 + value
+        print(value)
+        self._frequencyOfSecondSignal = self.FREQUENCIES[value-10]
+        print(self._frequencyOfSecondSignal)
         self._updateSignals()
 
     def setPhaseOfSecondSignal(self, value):
