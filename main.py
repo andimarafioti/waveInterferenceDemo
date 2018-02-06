@@ -63,9 +63,7 @@ class InterferenceModel(object):
         self._updateSignals()
 
     def setFrequencyOfSecondSignal(self, value):
-        print(value)
         self._frequencyOfSecondSignal = self.FREQUENCIES[value-10]
-        print(self._frequencyOfSecondSignal)
         self._updateSignals()
 
     def setPhaseOfSecondSignal(self, value):
