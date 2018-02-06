@@ -40,6 +40,9 @@ class InterferenceModel(object):
 
         self._audioPlayer = AudioPlayer(0.1 * self._totalSignal, self._sampling_rate, self._window_size, 2)
 
+        self._view.setFirstSignalFreq(3)
+        self._view.setSecondSignalFreq(1)
+
     def hearSound(self, bool):
         if bool:
             print(self._window_size)

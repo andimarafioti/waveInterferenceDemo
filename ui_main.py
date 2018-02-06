@@ -52,6 +52,12 @@ class InterferenceView(QtGui.QMainWindow):
         # self.retranslateUi(self)
         # QtCore.QMetaObject.connectSlotsByName(self)
 
+    def setFirstSignalFreq(self, frequencyIndex):
+        self._firstSignalConfigWidget.freqSlider.setValue(frequencyIndex+10)
+
+    def setSecondSignalFreq(self, frequencyIndex):
+        self._secondSignalConfigWidget.freqSlider.setValue(frequencyIndex+10)
+
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle("Interference")
         self.chkHearSound.setText("Hear")
