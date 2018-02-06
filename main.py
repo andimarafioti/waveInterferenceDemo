@@ -62,7 +62,7 @@ class InterferenceModel(object):
         self._updateSignals()
 
     def setPhaseOfFirstSignal(self, value):
-        self._phaseOfFirstSignal = 2 * np.pi * (value / 9)
+        self._phaseOfFirstSignal = 2 * np.pi * (value / 7)
         self._updateSignals()
 
     def setFrequencyOfSecondSignal(self, value):
@@ -70,7 +70,7 @@ class InterferenceModel(object):
         self._updateSignals()
 
     def setPhaseOfSecondSignal(self, value):
-        self._phaseOfSecondSignal = 2 * np.pi * (value / 9)
+        self._phaseOfSecondSignal = 2 * np.pi * (value / 7)
         self._updateSignals()
 
     def _updateSignals(self):

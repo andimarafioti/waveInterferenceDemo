@@ -31,7 +31,7 @@ class SinConfigWidget(QWidget):
 
         phaseNameView = QLabel('phase')
         self.phaseSlider = QSlider(QtCore.Qt.Horizontal)
-        self.phaseSlider.setRange(0, 9)
+        self.phaseSlider.setRange(0, 7)
         self.phaseSlider.setPageStep(2)
         self.phaseSlider.setTickInterval(1)
         self.phaseSlider.setTickPosition(QSlider.TicksBelow)
