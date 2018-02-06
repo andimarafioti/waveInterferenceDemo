@@ -2,6 +2,8 @@ from PyQt4 import QtCore
 
 from PyQt4.QtGui import QWidget, QGridLayout, QCheckBox, QLabel, QSlider
 
+from qCustomSlider import QCustomSlider
+
 __author__ = 'Andres'
 
 
@@ -23,7 +25,8 @@ class SinConfigWidget(QWidget):
         self.layout().addWidget(self.activateButton, 0, 1, 1, 1)
 
         freqNameView = QLabel('frec')
-        self.freqSlider = QSlider(QtCore.Qt.Horizontal)
+        self.freqSlider = QCustomSlider(QtCore.Qt.Horizontal)
+        self.freqSlider.setTickLabels(self._model._model.FREQUENCIES)
         self.freqSlider.setRange(10, 19)
         self.freqSlider.setPageStep(2)
         self.freqSlider.setTickInterval(1)

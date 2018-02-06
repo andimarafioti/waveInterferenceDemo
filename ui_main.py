@@ -38,12 +38,12 @@ class InterferenceView(QtGui.QMainWindow):
 
         self._firstSignalConfigWidget = SinConfigWidget(self)
         self._firstSignalConfigWidget.activateButton.stateChanged.connect(self._model.activateFirstSignal)
-        self._firstSignalConfigWidget.freqSlider.valueChanged.connect(self._model.setFrequencyOfFirstSignal)
+        self._firstSignalConfigWidget.freqSlider.onValueChangedCall(self._model.setFrequencyOfFirstSignal)
         self._firstSignalConfigWidget.phaseSlider.valueChanged.connect(self._model.setPhaseOfFirstSignal)
 
         self._secondSignalConfigWidget = SinConfigWidget(self)
         self._secondSignalConfigWidget.activateButton.stateChanged.connect(self._model.activateSecondSignal)
-        self._secondSignalConfigWidget.freqSlider.valueChanged.connect(self._model.setFrequencyOfSecondSignal)
+        self._secondSignalConfigWidget.freqSlider.onValueChangedCall(self._model.setFrequencyOfSecondSignal)
         self._secondSignalConfigWidget.phaseSlider.valueChanged.connect(self._model.setPhaseOfSecondSignal)
 
         self.gridLayout.addWidget(self._firstSignalConfigWidget, 2, 0, 1, 1)
