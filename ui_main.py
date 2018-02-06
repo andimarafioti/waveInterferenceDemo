@@ -34,11 +34,16 @@ class InterferenceView(QtGui.QMainWindow):
         self.gridLayout.addWidget(self.grPlot, 1, 0, 1, 2)
         self.setCentralWidget(self.centralwidget)
 
-        self._sinConfigWidget = SinConfigWidget(self)
-        self._sinConfigWidget.freqSlider.valueChanged.connect(self._model.setFrequencyOfFirstSignal)
-        self._sinConfigWidget.phaseSlider.valueChanged.connect(self._model.setPhaseOfFirstSignal)
+        self._firstSignalConfigWidget = SinConfigWidget(self)
+        self._firstSignalConfigWidget.freqSlider.valueChanged.connect(self._model.setFrequencyOfFirstSignal)
+        self._firstSignalConfigWidget.phaseSlider.valueChanged.connect(self._model.setPhaseOfFirstSignal)
 
-        self.gridLayout.addWidget(self._sinConfigWidget, 2, 0, 1, 1)
+        self._secondSignalConfigWidget = SinConfigWidget(self)
+        self._secondSignalConfigWidget.freqSlider.valueChanged.connect(self._model.setFrequencyOfSecondSignal)
+        self._secondSignalConfigWidget.phaseSlider.valueChanged.connect(self._model.setPhaseOfSecondSignal)
+
+        self.gridLayout.addWidget(self._firstSignalConfigWidget, 2, 0, 1, 1)
+        self.gridLayout.addWidget(self._secondSignalConfigWidget, 2, 1, 1, 1)
 
         # self.retranslateUi(self)
         # QtCore.QMetaObject.connectSlotsByName(self)

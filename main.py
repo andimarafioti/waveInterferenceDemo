@@ -59,6 +59,14 @@ class InterferenceModel(object):
         self._phaseOfFirstSignal = 2 * np.pi * (value / 100)
         self._updateSignals()
 
+    def setFrequencyOfSecondSignal(self, value):
+        self._frequencyOfSecondSignal = 100 + value
+        self._updateSignals()
+
+    def setPhaseOfSecondSignal(self, value):
+        self._phaseOfSecondSignal = 2 * np.pi * (value / 100)
+        self._updateSignals()
+
     def _updateSignals(self):
         self._time = np.arange(0, self._countOfCycles
                                / min(self._frequencyOfFirstSignal, self._frequencyOfSecondSignal),
