@@ -25,7 +25,6 @@ class InterferenceModel(object):
                                / min(self._frequencyOfFirstSignal, self._frequencyOfSecondSignal),
                                1 / self._sampling_rate)
         self._window_size = int(len(self._time)*2 / self._countOfCycles)
-        print(self._window_size)
 
         self._phaseOfFirstSignal = 0
         self._firstSignal = np.sin(2 * np.pi * self._frequencyOfFirstSignal * self._time + self._phaseOfFirstSignal,
@@ -35,9 +34,9 @@ class InterferenceModel(object):
         self._secondSignal = np.sin(2 * np.pi * self._frequencyOfSecondSignal * self._time + self._phaseOfSecondSignal,
                                     dtype=np.float32)
 
-        self._totalSignal = 0.05 * (self._firstSignal + self._secondSignal)
+        self._totalSignal = 0.5 * (self._firstSignal + self._secondSignal)
 
-        self._audioPlayer = AudioPlayer(self._totalSignal, self._sampling_rate, self._window_size, 2)
+        self._audioPlayer = AudioPlayer(0.1 * self._totalSignal, self._sampling_rate, self._window_size, 2)
 
     def hearSound(self, bool):
         if bool:
@@ -77,7 +76,10 @@ class InterferenceModel(object):
         self._secondSignal = np.sin(2 * np.pi * self._frequencyOfSecondSignal * self._time + self._phaseOfSecondSignal,
                                     dtype=np.float32)
 
-        self._totalSignal = 0.05 * (self._firstSignal + self._secondSignal)
+        self._totalSignal = 0.5 * (self._firstSignal + self._secondSignal)
+
+        yRange = max(0.1, max(self._totalSignal))
+        self._view.grPlot.setYRange(max=yRange, min=-yRange)
 
     def update(self):
         interval_shift = int(self._sampling_rate * self._lastTime * self._timeCorrection
