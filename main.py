@@ -85,7 +85,7 @@ class InterferenceModel(object):
 
         self._totalSignal = 0.5 * (self._firstSignal + self._secondSignal)
 
-        yRange = max(0.1, max(self._totalSignal))
+        yRange = max(0.1, max(abs(self._totalSignal)))
         self._view.grPlot.setYRange(max=yRange, min=-yRange)
 
     def update(self):
