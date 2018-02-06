@@ -23,15 +23,17 @@ class InterferenceView(QtGui.QMainWindow):
         self.centralwidget = QtGui.QWidget(self)
         self.gridLayout = QtGui.QGridLayout(self.centralwidget)
 
+        self.hearSoundLabel = QtGui.QLabel("Hear Sound")
+        self.chkHearSound = QtGui.QCheckBox(self.centralwidget)
         speedSlider = QSlider(QtCore.Qt.Horizontal)
         speedSlider.valueChanged.connect(self._model.setTimeCorrection)
-        self.gridLayout.addWidget(speedSlider, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.hearSoundLabel, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.chkHearSound, 0, 1, 1, 1)
+        self.gridLayout.addWidget(speedSlider, 0, 2, 1, 1)
 
-        self.chkHearSound = QtGui.QCheckBox(self.centralwidget)
-        self.gridLayout.addWidget(self.chkHearSound, 0, 0, 1, 1)
         self.grPlot = PlotWidget(self.centralwidget)
         self.grPlot.hideAxis('bottom')
-        self.gridLayout.addWidget(self.grPlot, 1, 0, 1, 2)
+        self.gridLayout.addWidget(self.grPlot, 1, 0, 1, 3)
         self.setCentralWidget(self.centralwidget)
 
         self._firstSignalConfigWidget = SinConfigWidget(self)
@@ -43,7 +45,9 @@ class InterferenceView(QtGui.QMainWindow):
         self._secondSignalConfigWidget.phaseSlider.valueChanged.connect(self._model.setPhaseOfSecondSignal)
 
         self.gridLayout.addWidget(self._firstSignalConfigWidget, 2, 0, 1, 1)
-        self.gridLayout.addWidget(self._secondSignalConfigWidget, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self._secondSignalConfigWidget, 2, 2, 1, 1)
+
+        self.updateGeometry()
 
         # self.retranslateUi(self)
         # QtCore.QMetaObject.connectSlotsByName(self)

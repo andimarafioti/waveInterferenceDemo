@@ -14,13 +14,13 @@ class SinConfigWidget(QWidget):
     def setupUi(self):
         self.setLayout(QGridLayout())
 
+        self.activateLabel = QLabel("Activate Signal")
+        self.layout().addWidget(self.activateLabel, 0, 0, 1, 1)
+
         self.activateButton = QCheckBox(self)
         self.activateButton.setEnabled(True)
 
-        self.layout().addWidget(self.activateButton, 0, 0, 1, 1)
-
-        freqSliderView = QWidget(self)
-        freqSliderView.setLayout(QGridLayout())
+        self.layout().addWidget(self.activateButton, 0, 1, 1, 1)
 
         freqNameView = QLabel('frec')
         self.freqSlider = QSlider(QtCore.Qt.Horizontal)
@@ -29,12 +29,6 @@ class SinConfigWidget(QWidget):
         self.freqSlider.setTickInterval(1)
         self.freqSlider.setTickPosition(QSlider.TicksBelow)
 
-        freqSliderView.layout().addWidget(freqNameView, 0, 0, 1, 1)
-        freqSliderView.layout().addWidget(self.freqSlider, 0, 1, 1, 1)
-
-        phaseSliderView = QWidget(self)
-        phaseSliderView.setLayout(QGridLayout())
-
         phaseNameView = QLabel('phase')
         self.phaseSlider = QSlider(QtCore.Qt.Horizontal)
         self.phaseSlider.setRange(0, 9)
@@ -42,9 +36,7 @@ class SinConfigWidget(QWidget):
         self.phaseSlider.setTickInterval(1)
         self.phaseSlider.setTickPosition(QSlider.TicksBelow)
 
-
-        phaseSliderView.layout().addWidget(phaseNameView, 0, 0, 1, 1)
-        phaseSliderView.layout().addWidget(self.phaseSlider, 0, 1, 1, 1)
-
-        self.layout().addWidget(freqSliderView, 1, 0, 1, 1)
-        self.layout().addWidget(phaseSliderView, 2, 0, 1, 1)
+        self.layout().addWidget(freqNameView, 1, 0, 1, 1)
+        self.layout().addWidget(self.freqSlider, 1, 1, 1, 1)
+        self.layout().addWidget(phaseNameView, 2, 0, 1, 1)
+        self.layout().addWidget(self.phaseSlider, 2, 1, 1, 1)
