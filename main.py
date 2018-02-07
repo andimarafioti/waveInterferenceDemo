@@ -109,7 +109,7 @@ class InterferenceModel(object):
                                clear=True)
         self._lastTime = time.clock()
 
-        QtCore.QTimer.singleShot(10, self.update)  # QUICKLY repeat
+        QtCore.QTimer.singleShot(10, self.update)
 
 
 if __name__ == "__main__":
