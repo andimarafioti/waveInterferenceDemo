@@ -116,5 +116,5 @@ if __name__ == "__main__":
     app = QtGui.QApplication(sys.argv)
     form = InterferenceModel()
     form.show()
-    form.update()  # start with something
+    form.update()
     app.exec_()
