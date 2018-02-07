@@ -17,17 +17,17 @@ class InterferenceModel(object):
         self._view = InterferenceView(self)
         self._view.grPlot.setYRange(max=1, min=-1)
 
-        self._sampling_rate = 44100
+        self._sampling_rate = 44000
         self._frequencyOfFirstSignal = self.FREQUENCIES[0]
         self._frequencyOfSecondSignal = self.FREQUENCIES[3]
         self._lastTime = time.clock()
         self._timeCorrection = 1 / 1000
 
-        self._countOfCycles = 20
+        self._countOfCycles = 4
         self._time = np.arange(0, self._countOfCycles
                                / min(self._frequencyOfFirstSignal, self._frequencyOfSecondSignal),
                                1 / self._sampling_rate)
-        self._window_size = int(len(self._time)*2 / self._countOfCycles)
+        self._window_size = int(self._sampling_rate*2/self.FREQUENCIES[0])
 
         self._phaseOfFirstSignal = 0
         self._firstAmplitude = 1
@@ -43,15 +43,17 @@ class InterferenceModel(object):
 
         self._totalSignal = 0.5 * (self._firstSignal + self._secondSignal)
 
-        self._audioPlayer = AudioPlayer(0.1 * self._totalSignal, self._sampling_rate, self._window_size, 2)
+        self._audioPlayer = AudioPlayer(self, self._sampling_rate, self._window_size, 2)
 
         self._view.setFirstSignalFreq(0)
         self._view.setSecondSignalFreq(3)
 
+    def getBufferedSignal(self):
+        return 0.1 * self._totalSignal[:2*self._window_size]
+
     def hearSound(self, bool):
         self._audioPlayer.stop()
         if bool:
-            self._audioPlayer = AudioPlayer(0.1 * self._totalSignal, self._sampling_rate, self._window_size, 2)
             self._audioPlayer.start()
         else:
             self._audioPlayer.stop()
@@ -65,12 +67,10 @@ class InterferenceModel(object):
     def activateFirstSignal(self, value):
         self._firstAmplitude = value/2
         self._updateSignals()
-        self.hearSound(self._view.chkHearSound.isChecked())
 
     def setFrequencyOfFirstSignal(self, value):
         self._frequencyOfFirstSignal = self.FREQUENCIES[value-10]
         self._updateSignals()
-        self.hearSound(self._view.chkHearSound.isChecked())
 
     def setPhaseOfFirstSignal(self, value):
         self._phaseOfFirstSignal = 2 * np.pi * (value / 8)
@@ -79,21 +79,16 @@ class InterferenceModel(object):
     def activateSecondSignal(self, value):
         self._secondAmplitude = value/2
         self._updateSignals()
-        self.hearSound(self._view.chkHearSound.isChecked())
 
     def setFrequencyOfSecondSignal(self, value):
         self._frequencyOfSecondSignal = self.FREQUENCIES[value-10]
         self._updateSignals()
-        self.hearSound(self._view.chkHearSound.isChecked())
 
     def setPhaseOfSecondSignal(self, value):
         self._phaseOfSecondSignal = 2 * np.pi * (value / 8)
         self._updateSignals()
 
     def _updateSignals(self):
-        self._time = np.arange(0, self._countOfCycles
-                               / min(self._frequencyOfFirstSignal, self._frequencyOfSecondSignal),
-                               1 / self._sampling_rate)
         self._firstSignal = self._firstAmplitude * \
                             np.sin(2 * np.pi * self._frequencyOfFirstSignal * self._time + self._phaseOfFirstSignal,
                                    dtype=np.float32)

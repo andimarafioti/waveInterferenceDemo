@@ -16,7 +16,7 @@ class AudioPlayer(object):
 								frames_per_buffer=frames_per_buffer, stream_callback=self.callback, start=False)
 
 	def callback(self, in_data, frame_count, time_info, status):
-		data = self._signal[:2*frame_count]
+		data = self._signal.getBufferedSignal()
 		return data.tostring(), pyaudio.paContinue
 
 	def start(self):
