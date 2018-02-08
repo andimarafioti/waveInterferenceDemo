@@ -62,7 +62,10 @@ class InterferenceModel(object):
         self._view.show()
 
     def setTimeCorrection(self, value):
-        self._timeCorrection = 1/(1000 - 10 * value)
+        if value == -1:
+            self._timeCorrection = 0
+        else:
+            self._timeCorrection = 10**(value/2-3)
 
     def activateFirstSignal(self, value):
         self._firstAmplitude = value/2

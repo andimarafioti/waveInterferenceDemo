@@ -26,6 +26,9 @@ class InterferenceView(QtGui.QMainWindow):
         self.hearSoundLabel = QtGui.QLabel("Hear Sound")
         self.chkHearSound = QtGui.QCheckBox(self.centralwidget)
         speedSlider = QSlider(QtCore.Qt.Horizontal)
+        speedSlider.setRange(-1, 6)
+        # speedSlider.setTickInterval(0.00001)
+
         speedSlider.valueChanged.connect(self._model.setTimeCorrection)
         self.gridLayout.addWidget(self.hearSoundLabel, 0, 0, 1, 1)
         self.gridLayout.addWidget(self.chkHearSound, 0, 1, 1, 1)
