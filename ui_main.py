@@ -18,7 +18,7 @@ class InterferenceView(QtGui.QMainWindow):
         self.grPlot.plotItem.showGrid(True, True, 0.7)
 
     def setupUi(self):
-        self.resize(820, 650)
+        self.showFullScreen()
         self.setAutoFillBackground(False)
         self.centralwidget = QtGui.QWidget(self)
         self.gridLayout = QtGui.QGridLayout(self.centralwidget)
