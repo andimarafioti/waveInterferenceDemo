@@ -57,6 +57,10 @@ class InterferenceView(QtGui.QMainWindow):
         self.gridLayout.addWidget(self._firstSignalConfigWidget, 2, 0, 1, 2)
         self.gridLayout.addWidget(self._secondSignalConfigWidget, 2, 2, 1, 2)
 
+
+        self.gridLayout.setColumnStretch(1, 2)
+        self.gridLayout.setColumnStretch(3, 2)
+
         self.updateGeometry()
 
         # self.retranslateUi(self)
