@@ -39,6 +39,8 @@ class InterferenceView(QtGui.QMainWindow):
 
         self.grPlot = PlotWidget(self.centralwidget)
         self.grPlot.hideAxis('bottom')
+        self.grPlot.setMouseEnabled(x=False, y=False)
+        self.grPlot.wheelEvent = lambda event: event.accept()  # WheelEvent crashes the autorange. Dirty fix.
         self.gridLayout.addWidget(self.grPlot, 1, 0, 1, 4)
         self.setCentralWidget(self.centralwidget)
 
