@@ -24,7 +24,7 @@ class SinConfigWidget(QWidget):
 
         self.layout().addWidget(self.activateButton, 0, 1, 1, 1)
 
-        freqNameView = QLabel('frec')
+        freqNameView = QLabel('Frequency')
         self.freqSlider = QCustomSlider(QtCore.Qt.Horizontal)
         self.freqSlider.setTickLabels(self._model._model.FREQUENCIES)
         self.freqSlider.setRange(10, 19)
@@ -32,7 +32,7 @@ class SinConfigWidget(QWidget):
         self.freqSlider.setTickInterval(1)
         self.freqSlider.setTickPosition(QSlider.TicksBelow)
 
-        phaseNameView = QLabel('phase')
+        phaseNameView = QLabel('Phase')
         self.phaseSlider = QSlider(QtCore.Qt.Horizontal)
         self.phaseSlider.setRange(0, 8)
         self.phaseSlider.setPageStep(2)
