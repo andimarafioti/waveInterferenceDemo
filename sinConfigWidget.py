@@ -24,7 +24,7 @@ class SinConfigWidget(QWidget):
 
         self.layout().addWidget(self.activateButton, 0, 1, 1, 1)
 
-        freqNameView = QLabel('Frequency')
+        freqNameView = QLabel('Frequency [Hz]')
         self.freqSlider = QCustomSlider(QtCore.Qt.Horizontal)
         self.freqSlider.setTickLabels(self._model._model.FREQUENCIES)
         self.freqSlider.setRange(10, 19)
