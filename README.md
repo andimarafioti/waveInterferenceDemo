@@ -4,4 +4,4 @@ An interactive demonstration of wave interference made for the "Tag gegen Lärm"
 
 The interface plots in real time up to two signals as can be seen in the following screenshot:
 
-![Alt text](/interference.jpg?raw=true=960x540 "Screenshot of the interface" )
+![Alt text](/interference.jpg?raw=true=480x270 "Screenshot of the interface" )
