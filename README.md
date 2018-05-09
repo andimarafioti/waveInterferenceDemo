@@ -1,3 +1,3 @@
-# waveInterferenceDemo
+# Interference Demo
 
-Demonstration of wave interference for the "Noise awareness day" at the Acoustics Research Institute in Vienna.
+An interactive demonstration of wave interference made for the "Tag gegen Lärm" (Noise awareness day) at the Acoustics Research Institute in Vienna.
